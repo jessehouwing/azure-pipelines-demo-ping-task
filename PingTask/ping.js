@@ -23,9 +23,7 @@ function run() {
                 tl.setResult(tl.TaskResult.Failed, output);
             }
             else {
-                tl._writeLine("Result:" + match[0]);
                 let percentage = +match[0];
-                tl._writeLine("Percentage: " + percentage);
                 if (percentage == 100) {
                     tl.setResult(tl.TaskResult.Failed, "100% Loss");
                 }
@@ -43,4 +41,4 @@ function run() {
     });
 }
 run();
-//# sourceMappingURL=sample.js.map
+//# sourceMappingURL=ping.js.map

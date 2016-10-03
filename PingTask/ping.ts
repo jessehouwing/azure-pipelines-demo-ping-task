@@ -19,9 +19,7 @@ async function run() {
         }
         else
         {
-            tl._writeLine("Result:"+ match[0])
             let percentage: number = +match[0];
-            tl._writeLine("Percentage: " + percentage)
             if (percentage == 100)
             {
                 tl.setResult(tl.TaskResult.Failed, "100% Loss");

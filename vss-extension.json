@@ -2,17 +2,18 @@
   "manifestVersion": 1,
   "id": "jessehouwing-vsts-ping-task",
   "name": "Ping Task",
-  "version": "0.0.0",
+  "version": "0.1.2",
   "publisher": "jessehouwing",
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
     }
   ],
+  "public": false,
   "scope": [
     "vso.build"
   ],
-  "description": "Task to help you set those pesky MsBuild Properties.",
+  "description": "Simple task that pings a remote host.",
   "categories": [
     "Build and release"
   ],
@@ -23,7 +24,7 @@
   ],
   "screenshots": [
     {
-      "path": "PingTask/icon.png"
+      "path": "icon.png"
     }
   ],
   "content": {
@@ -35,7 +36,7 @@
     "theme": "dark"
   },
   "icons": {
-    "default": "PingTask/icon.png"
+    "default": "icon.png"
   },
   "files": [
     {
