@@ -1,0 +1,57 @@
+{
+  "manifestVersion": 1,
+  "id": "jessehouwing-vsts-ping-task",
+  "name": "Ping Task",
+  "version": "0.0.0",
+  "publisher": "jessehouwing",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "scope": [
+    "vso.build"
+  ],
+  "description": "Task to help you set those pesky MsBuild Properties.",
+  "categories": [
+    "Build and release"
+  ],
+  "tags": [
+    "Build",
+    "Ping",
+    "Network"
+  ],
+  "screenshots": [
+    {
+      "path": "PingTask/icon.png"
+    }
+  ],
+  "content": {
+  },
+  "links": {
+  },
+  "branding": {
+    "color": "rgb(36, 43, 50)",
+    "theme": "dark"
+  },
+  "icons": {
+    "default": "PingTask/icon.png"
+  },
+  "files": [
+    {
+      "path": "PingTask"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "PingTask",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "PingTask"
+      }
+    }
+  ]
+}
