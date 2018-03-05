@@ -1,0 +1,41 @@
+{
+  "id": "ccfed453-07d0-4ea4-ab22-c690ac803d13",
+  "name": "MyFirstMultiPing",
+  "friendlyName": "Ping",
+  "description": "Pings a remote host",
+  "author": "Jesse Houwing",
+  "helpMarkDown": "Pings a remote host",
+  "category": "Utility",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [ "ping" ],
+  "version": {
+    "Major": "1",
+    "Minor": "1",
+    "Patch": "2"
+  },
+  "minimumAgentVersion": "1.95.0",
+  "instanceNameFormat": "Ping $(RemoteHost)",
+  "inputs": [
+    {
+      "defaultValue": "www.example.org",
+      "helpMarkdown": "Hostname or IP address to ping.",
+      "label": "Remote Host",
+      "name": "RemoteHost",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "execution": {
+    "Node": {
+      "target": "ping.js",
+      "argumentFormat": ""
+    },
+    "PowerShell3": {
+      "target": "ping.ps1",
+      "argumentFormat": ""
+    }
+  }
+}

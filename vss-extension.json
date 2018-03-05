@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "jessehouwing-vsts-ping-task",
   "name": "Ping Task",
-  "version": "0.1.2",
+  "version": "2.1.2",
   "publisher": "jessehouwing",
   "targets": [
     {
@@ -52,6 +52,16 @@
       ],
       "properties": {
         "name": "PingTask"
+      }
+    },
+    {
+      "id": "MultiPingTask",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "MultiPingTask"
       }
     }
   ]
