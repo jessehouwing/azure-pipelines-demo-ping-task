@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "path": "MultiPingTaskV1"
+    },
+    {
+      "path": "MultiPingTaskV2"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "MultiPingTask",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "MultiPingTask"
+      }
+    }
+  ]
+}
