@@ -1,10 +1,7 @@
 {
   "files": [
     {
-      "path": "MultiPingTaskV1"
-    },
-    {
-      "path": "MultiPingTaskV2"
+      "path": "MultiPingTask"
     }
   ],
   "contributions": [
