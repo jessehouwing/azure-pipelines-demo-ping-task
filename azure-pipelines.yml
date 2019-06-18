@@ -18,7 +18,8 @@ steps:
   - task: Snyk@2
     inputs:
       multiFile: true
-      files: '#yarn.lock
+      files: |
+        #yarn.lock
         **/package.json
          #package-lock.json
         #Gemfile
@@ -35,7 +36,7 @@ steps:
         #packages.config
         #composer.lock
         
-        !**/node_modules/**/*'
+        !**/node_modules/**/*
       protect: false
       test: true
       monitor: false
