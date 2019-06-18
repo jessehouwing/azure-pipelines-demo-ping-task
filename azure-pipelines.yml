@@ -14,7 +14,7 @@ steps:
     inputs:
       version: 10.*
       checkLatest: true
-    
+
 - task: Snyk@2
   inputs:
     multiFile: true
