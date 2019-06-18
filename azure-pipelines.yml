@@ -1,0 +1,31 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: UseNode@1
+    inputs:
+      version: 10.*
+      checkLatest: true
+
+  - task: Npm@1
+    inputs:
+      command: custom
+      customCommand: 'run initdev'
+
+  - task: Npm@1
+    inputs:
+      command: custom
+      customCommand: 'run build'
+    
+  - task: Snyk@2
+    inputs:
+      multiFile: true
+      files: 
