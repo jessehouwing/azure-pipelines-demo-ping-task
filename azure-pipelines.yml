@@ -10,68 +10,20 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - task: UseNode@1
-    inputs:
-      version: 10.*
-      checkLatest: true
-
-  - task: Snyk@2
-    inputs:
-      multiFile: true
-      files: |
-        #yarn.lock
-        **/package.json
-         #package-lock.json
-        #Gemfile
-        #Gemfile.lock
-        #pom.xml
-        #Pipfile
-        #requirements.txt
-        #build.gradle
-        #build.gradle.kts
-        #build.sbt
-        #Gopkg.lock
-        #**/vendor/vendor.json
-        #**/obj/project.assets.json
-        #packages.config
-        #composer.lock
-        
-        !**/node_modules/**/*
-      protect: false
-      test: true
-      monitor: false
-      authType: 'endpoint'
-      endpoint: 'Snyk.io'
-      failBuild: true
-      dev: false
-      trustPolicies: false
-
-- task: Snyk@2
+- task: QueryAzureDevOpsExtensionVersion@101
+  name: 'Q'
   inputs:
-    multiFile: true
-    files: '#yarn.lock
-      #package.json
-      #package-lock.json
-      #Gemfile
-      #Gemfile.lock
-      #pom.xml
-      #Pipfile
-      #requirements.txt
-      #build.gradle
-      #build.gradle.kts
-      #build.sbt
-      #Gopkg.lock
-      #**/vendor/vendor.json
-      #**/obj/project.assets.json
-      #packages.config
-      #composer.lock
+    connectTo: 'VsTeam'
+    connectedServiceName: 'marketplace-developertools'
+    publisherId: 'jessehouwing'
+    extensionId: 'vsts-ensire-tests-dev'
+    versionAction: 'None'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
       
-      #!**/node_modules/**/*'
-    protect: false
-    test: true
-    monitor: false
-    authType: 'endpoint'
-    endpoint: 'Snyk.io'
-    failBuild: true
-    dev: false
-    trustPolicies: false
+      Write-Host "$(Q.Extension.Version)"
+    pwsh: true
