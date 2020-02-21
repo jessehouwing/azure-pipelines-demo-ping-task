@@ -10,6 +10,10 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: TfxInstaller@101
+  inputs:
+    version: 'v0.7.x'
+
 - task: QueryAzureDevOpsExtensionVersion@101
   name: 'Q'
   inputs:
