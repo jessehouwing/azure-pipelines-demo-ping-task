@@ -16,6 +16,7 @@ steps:
 
 - task: QueryAzureDevOpsExtensionVersion@101
   name: 'Q'
+  displayName: 'Query the version on the marketplace'
   inputs:
     connectTo: 'VsTeam'
     connectedServiceName: 'marketplace-developertools'
