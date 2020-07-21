@@ -19,7 +19,7 @@ steps:
   displayName: 'Query the version on the marketplace'
   inputs:
     connectTo: 'VsTeam'
-    connectedServiceName: 'marketplace-developertools'
+    connectedServiceName: 'Marketplace'
     publisherId: 'jessehouwing'
     extensionId: 'vsts-ensire-tests-dev'
     versionAction: 'None'
