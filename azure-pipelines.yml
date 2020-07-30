@@ -21,7 +21,7 @@ steps:
     connectTo: 'VsTeam'
     connectedServiceName: 'Marketplace'
     publisherId: 'jessehouwing'
-    extensionId: 'vsts-ensire-tests-dev'
+    extensionId: 'vsts-ensire-tests-dev-xxx'
     versionAction: 'None'
 
 - task: PowerShell@2
