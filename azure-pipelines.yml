@@ -23,6 +23,7 @@ steps:
     publisherId: 'jessehouwing'
     extensionId: 'vsts-ensire-tests-dev-xxx'
     versionAction: 'None'
+    extensionVersionOverride: '$(extensionVersionOverride)'
 
 - task: PowerShell@2
   inputs:
