@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+container:
+  image: node:10
+
 steps:
 - task: TfxInstaller@101
   inputs:
@@ -33,3 +36,31 @@ steps:
       
       Write-Host "$(Q.Extension.Version)"
     pwsh: true 
+
+- job:
+        pool:
+          name: ${{ variables.linuxAzureDevOpsPool }}
+        container:
+          image: ${{ variables.nodeDockerImage }}
+        steps:
+          - task: Npm@1
+            inputs:
+              command: 'install'
+              workingDir: ${{ variables.taskBuildDirectory }}
+          - task: Bash@3
+            displayName: Compile Javascript
+            inputs:
+              targetType: "inline"
+              script: |
+                export PATH="${{ Build.SourcesDirectory }}/${{ variables.taskBuildDirectory }}/node_modules/.bin:$PATH"
+                cd ${{ variables.taskBuildDirectory }}
+                tsc
+          - task: Npm@1
+            inputs:
+              command: 'custom'
+              workingDir: '${{ variables.taskBuildDirectory }}/tests'
+              customCommand: 'testScript'
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '**/ResultsFile.xml'
