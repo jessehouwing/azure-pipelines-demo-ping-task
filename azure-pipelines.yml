@@ -13,11 +13,11 @@ container:
   image: node:10
 
 steps:
-- task: TfxInstaller@101
+- task: TfxInstaller@3
   inputs:
     version: 'v0.7.x'
 
-- task: QueryAzureDevOpsExtensionVersion@101
+- task: QueryAzureDevOpsExtensionVersion@3
   name: 'Q'
   displayName: 'Query the version on the marketplace'
   inputs:
@@ -36,31 +36,3 @@ steps:
       
       Write-Host "$(Q.Extension.Version)"
     pwsh: true 
-
-- job:
-        pool:
-          name: ${{ variables.linuxAzureDevOpsPool }}
-        container:
-          image: ${{ variables.nodeDockerImage }}
-        steps:
-          - task: Npm@1
-            inputs:
-              command: 'install'
-              workingDir: ${{ variables.taskBuildDirectory }}
-          - task: Bash@3
-            displayName: Compile Javascript
-            inputs:
-              targetType: "inline"
-              script: |
-                export PATH="${{ Build.SourcesDirectory }}/${{ variables.taskBuildDirectory }}/node_modules/.bin:$PATH"
-                cd ${{ variables.taskBuildDirectory }}
-                tsc
-          - task: Npm@1
-            inputs:
-              command: 'custom'
-              workingDir: '${{ variables.taskBuildDirectory }}/tests'
-              customCommand: 'testScript'
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFormat: 'JUnit'
-              testResultsFiles: '**/ResultsFile.xml'
