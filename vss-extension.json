@@ -15,7 +15,7 @@
   ],
   "description": "Simple task that pings a remote host.",
   "categories": [
-    "Build and release"
+    "Azure Pipelines"
   ],
   "tags": [
     "Build",
