@@ -1,0 +1,13 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+
+pool:
+  vmImage: ubuntu-latest
+
+- task: TfxInstaller@5
+  displayName: 'Use Node CLI for Azure DevOps (tfx-cli)'
+  inputs:
+    checkLatest: true
