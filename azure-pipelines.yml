@@ -13,11 +13,11 @@ container:
   image: node:10
 
 steps:
-- task: TfxInstaller@3
+- task: TfxInstaller@5
   inputs:
-    version: 'v0.7.x'
+    version: builtin
 
-- task: QueryAzureDevOpsExtensionVersion@3
+- task: QueryAzureDevOpsExtensionVersion@5
   name: 'Q'
   displayName: 'Query the version on the marketplace'
   inputs:
