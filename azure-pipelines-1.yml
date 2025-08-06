@@ -24,3 +24,23 @@ jobs:
       displayName: 'Use Node CLI for Azure DevOps (tfx-cli)'
       inputs:
         checkLatest: true
+
+  - job: windows_builtin
+    pool:
+      vmImage: windows-latest
+
+    steps:
+    - task: TfxInstaller@5
+      displayName: 'Use Node CLI for Azure DevOps (tfx-cli)'
+      inputs:
+        version: builtin
+        
+  - job: linux_builtin
+    pool:
+      vmImage: ubuntu-latest
+
+    steps:
+    - task: TfxInstaller@5
+      displayName: 'Use Node CLI for Azure DevOps (tfx-cli)'
+      inputs:
+        version: builtin
