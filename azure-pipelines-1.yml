@@ -7,6 +7,7 @@
 pool:
   vmImage: ubuntu-latest
 
+steps:
 - task: TfxInstaller@5
   displayName: 'Use Node CLI for Azure DevOps (tfx-cli)'
   inputs:
