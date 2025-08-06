@@ -8,10 +8,11 @@ jobs:
 
   - job: linux_builtin
     pool:
-      vmImage: ubuntu-latest
+      vmImage: windows-latest
 
     steps:
     - bash: |
+        npm config list
         cd /home/vsts/work/_tasks/TfxInstaller_f7c56a03-d9d3-4019-b144-6283b88a66a8/5.0.538/
         ls -la
         cd /home/vsts/work/_tasks/TfxInstaller_f7c56a03-d9d3-4019-b144-6283b88a66a8/5.0.538/node_modules/.bin
