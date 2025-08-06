@@ -11,6 +11,8 @@ jobs:
       vmImage: windows-latest
 
     steps:
+    - pwsh: |
+        npm config ls -l | Select-String -Pattern "link|script|exec"
     - bash: |
         npm config list
         cd /home/vsts/work/_tasks/TfxInstaller_f7c56a03-d9d3-4019-b144-6283b88a66a8/5.0.538/
