@@ -4,11 +4,23 @@
 # https://aka.ms/yaml
 
 
-pool:
-  vmImage: windows-latest
+jobs:
+  - job: windows
+    pool:
+      vmImage: windows-latest
 
-steps:
-- task: TfxInstaller@5
-  displayName: 'Use Node CLI for Azure DevOps (tfx-cli)'
-  inputs:
-    checkLatest: true
+    steps:
+    - task: TfxInstaller@5
+      displayName: 'Use Node CLI for Azure DevOps (tfx-cli)'
+      inputs:
+        checkLatest: true
+        
+  - job: linux
+    pool:
+      vmImage: ubuntu-latest
+
+    steps:
+    - task: TfxInstaller@5
+      displayName: 'Use Node CLI for Azure DevOps (tfx-cli)'
+      inputs:
+        checkLatest: true
