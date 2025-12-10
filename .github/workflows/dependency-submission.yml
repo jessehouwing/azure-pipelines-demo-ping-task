@@ -1,0 +1,23 @@
+name: Submit Azure Pipelines Dependencies
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write # Required for dependency submission
+
+jobs:
+  submit-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Submit Azure Pipelines Dependencies
+        uses: jessehouwing/azure-pipelines-dependency-submission@main
+        with:
+          azure-devops-url: https://dev.azure.com/jessehouwing-dev
+          azure-devops-token: ${{ secrets.AZURE_DEVOPS_PAT }}
+          azure-devops-project: vsts-extension-tasks-test
