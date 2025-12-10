@@ -19,5 +19,5 @@ jobs:
         uses: jessehouwing/azure-pipelines-dependency-submission@main
         with:
           azure-devops-url: https://dev.azure.com/jessehouwing-dev
-          azure-devops-token: ${{ secrets.AZURE_DEVOPS_PAT }}
+          azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
           azure-devops-project: vsts-extension-tasks-test
