@@ -9,9 +9,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-container:
-  image: node:10
-
 steps:
 - task: TfxInstaller@5
   inputs:
