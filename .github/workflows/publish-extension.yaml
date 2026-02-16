@@ -78,7 +78,7 @@ jobs:
           publisher-id: ${{ env.PUBLISHER_ID }}
           extension-id: ${{ inputs.extension_id }}
 
-      - name: Install extension
+      - name: Share extension
         uses: jessehouwing/azure-devops-extension-tasks/share@refactor/v6
         with:
           auth-type: pat
@@ -127,7 +127,7 @@ jobs:
         with:
           auth-type: oidc
           publisher-id: ${{ env.PUBLISHER_ID }}
-          extension-id: ${{ inputs.extension_id }}-oidc
+          extension-id: ${{ inputs.extension_id }}-oicd
           version-action: Patch
 
       - id: version
@@ -145,7 +145,7 @@ jobs:
         uses: jessehouwing/azure-devops-extension-tasks/package@refactor/v6
         with:
           publisher-id: ${{ env.PUBLISHER_ID }}
-          extension-id: ${{ inputs.extension_id }}-oidc
+          extension-id: ${{ inputs.extension_id }}-oicd
           extension-version: ${{ steps.version.outputs.value }}
           extension-visibility: private
           update-tasks-version: true
@@ -157,7 +157,7 @@ jobs:
         with:
           auth-type: oidc
           publisher-id: ${{ env.PUBLISHER_ID }}
-          extension-id: ${{ inputs.extension_id }}-oidc
+          extension-id: ${{ inputs.extension_id }}-oicd
           publish-source: vsix
           vsix-file: ${{ steps.package.outputs.vsix-path }}
           no-wait-validation: true
@@ -167,4 +167,30 @@ jobs:
         with:
           auth-type: oidc
           publisher-id: ${{ env.PUBLISHER_ID }}
-          extension-id: ${{ inputs.extension_id }}-oidc
+          extension-id: ${{ inputs.extension_id }}-oicd
+
+      - name: Share extension
+        uses: jessehouwing/azure-devops-extension-tasks/share@refactor/v6
+        with:
+          auth-type: oidc
+          publisher-id: ${{ env.PUBLISHER_ID }}
+          extension-id: ${{ inputs.extension_id }}-oicd
+          accounts: |
+            https://dev.azure.com/jessehouwing-dev
+            
+      - name: Install extension
+        uses: jessehouwing/azure-devops-extension-tasks/install@refactor/v6
+        with:
+          auth-type: oidc
+          publisher-id: ${{ env.PUBLISHER_ID }}
+          extension-id: ${{ inputs.extension_id }}-oicd
+          accounts: |
+            https://dev.azure.com/jessehouwing-dev
+
+      - name: Wait for installation
+        uses: jessehouwing/azure-devops-extension-tasks/wait-for-installation@refactor/v6
+        with:
+          auth-type: oidc
+          vsix-path: ${{ steps.package.outputs.vsix-path }}
+          accounts: |
+            https://dev.azure.com/jessehouwing-dev
