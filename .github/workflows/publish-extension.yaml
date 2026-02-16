@@ -69,6 +69,7 @@ jobs:
           publish-source: vsix
           vsix-file: ${{ steps.package.outputs.vsix-path }}
           no-wait-validation: true
+          share-with: jessehouwing-dev
 
       - name: Wait for validation
         uses: jessehouwing/azure-devops-extension-tasks/wait-for-validation@refactor/v6
@@ -77,6 +78,29 @@ jobs:
           token: ${{ secrets.MARKETPLACE_PAT }}
           publisher-id: ${{ env.PUBLISHER_ID }}
           extension-id: ${{ inputs.extension_id }}
+
+      - name: Install extension
+        uses: jessehouwing/azure-devops-extension-tasks/install@refactor/v6
+        with:
+          auth-type: pat
+          token: ${{ secrets.MARKETPLACE_PAT }}
+          publisher-id: ${{ env.PUBLISHER_ID }}
+          extension-id: ${{ inputs.extension_id }}
+          accounts: https://dev.azure.com/jessehouwing-dev
+          service-url: https://dev.azure.com/jessehouwing-dev
+
+      - name: Install extension
+        uses: jessehouwing/azure-devops-extension-tasks/wait-for-installation@refactor/v6
+        with:
+          auth-type: pat
+          token: ${{ secrets.MARKETPLACE_PAT }}
+          accounts: jessehouwing-dev
+          service-url: https://dev.azure.com/jessehouwing-dev
+          vsix-path: ${{ steps.package.outputs.vsix-path }}
+          
+
+      
+
 
   publish_oidc:
     name: Publish private (OIDC)
