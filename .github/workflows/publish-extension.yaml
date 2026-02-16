@@ -1,0 +1,141 @@
+name: Publish private extension (PAT + OIDC)
+
+on:
+  workflow_dispatch:
+    inputs:
+      extension_id:
+        description: Extension ID (base; OIDC job appends -oidc)
+        required: true
+        default: workflow-test
+      initial_version:
+        description: Initial version to use when extension does not yet exist
+        required: true
+        default: 0.1.0
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  PUBLISHER_ID: jessehouwing
+
+jobs:
+  publish_pat:
+    name: Publish private (PAT)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: query
+        name: Query next patch version
+        continue-on-error: true
+        uses: jessehouwing/azure-devops-extension-tasks/query-version@v6
+        with:
+          auth-type: pat
+          token: ${{ secrets.MARKETPLACE_PAT }}
+          publisher-id: ${{ env.PUBLISHER_ID }}
+          extension-id: ${{ inputs.extension_id }}
+          version-action: Patch
+
+      - id: version
+        name: Resolve version (query or initial)
+        shell: bash
+        run: |
+          if [[ "${{ steps.query.outcome }}" == "success" && -n "${{ steps.query.outputs.proposed-version }}" ]]; then
+            echo "value=${{ steps.query.outputs.proposed-version }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=${{ inputs.initial_version }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - id: package
+        name: Package VSIX
+        uses: jessehouwing/azure-devops-extension-tasks/package@v6
+        with:
+          publisher-id: ${{ env.PUBLISHER_ID }}
+          extension-id: ${{ inputs.extension_id }}
+          extension-version: ${{ steps.version.outputs.value }}
+          extension-visibility: private
+          update-tasks-version: true
+          update-tasks-id: true
+          output-path: ${{ runner.temp }}
+
+      - name: Publish from VSIX
+        uses: jessehouwing/azure-devops-extension-tasks/publish@v6
+        with:
+          auth-type: pat
+          token: ${{ secrets.MARKETPLACE_PAT }}
+          publisher-id: ${{ env.PUBLISHER_ID }}
+          extension-id: ${{ inputs.extension_id }}
+          publish-source: vsix
+          vsix-file: ${{ steps.package.outputs.vsix-path }}
+          no-wait-validation: true
+
+      - name: Wait for validation
+        uses: jessehouwing/azure-devops-extension-tasks/wait-for-validation@v6
+        with:
+          auth-type: pat
+          token: ${{ secrets.MARKETPLACE_PAT }}
+          publisher-id: ${{ env.PUBLISHER_ID }}
+          extension-id: ${{ inputs.extension_id }}
+
+  publish_oidc:
+    name: Publish private (OIDC)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure login for OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+
+      - id: query
+        name: Query next patch version
+        continue-on-error: true
+        uses: jessehouwing/azure-devops-extension-tasks/query-version@v6
+        with:
+          auth-type: oidc
+          publisher-id: ${{ env.PUBLISHER_ID }}
+          extension-id: ${{ inputs.extension_id }}-oidc
+          version-action: Patch
+
+      - id: version
+        name: Resolve version (query or initial)
+        shell: bash
+        run: |
+          if [[ "${{ steps.query.outcome }}" == "success" && -n "${{ steps.query.outputs.proposed-version }}" ]]; then
+            echo "value=${{ steps.query.outputs.proposed-version }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=${{ inputs.initial_version }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - id: package
+        name: Package VSIX
+        uses: jessehouwing/azure-devops-extension-tasks/package@v6
+        with:
+          publisher-id: ${{ env.PUBLISHER_ID }}
+          extension-id: ${{ inputs.extension_id }}-oidc
+          extension-version: ${{ steps.version.outputs.value }}
+          extension-visibility: private
+          update-tasks-version: true
+          update-tasks-id: true
+          output-path: ${{ runner.temp }}
+
+      - name: Publish from VSIX
+        uses: jessehouwing/azure-devops-extension-tasks/publish@v6
+        with:
+          auth-type: oidc
+          publisher-id: ${{ env.PUBLISHER_ID }}
+          extension-id: ${{ inputs.extension_id }}-oidc
+          publish-source: vsix
+          vsix-file: ${{ steps.package.outputs.vsix-path }}
+          no-wait-validation: true
+
+      - name: Wait for validation
+        uses: jessehouwing/azure-devops-extension-tasks/wait-for-validation@v6
+        with:
+          auth-type: oidc
+          publisher-id: ${{ env.PUBLISHER_ID }}
+          extension-id: ${{ inputs.extension_id }}-oidc
