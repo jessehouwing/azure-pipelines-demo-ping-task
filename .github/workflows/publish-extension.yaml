@@ -176,7 +176,7 @@ jobs:
           publisher-id: ${{ env.PUBLISHER_ID }}
           extension-id: ${{ inputs.extension_id }}-oicd
           accounts: |
-            https://dev.azure.com/jessehouwing
+            https://dev.azure.com/jessehouwing-dev
             
       - name: Install extension
         uses: jessehouwing/azure-devops-extension-tasks/install@refactor/v6
@@ -185,7 +185,7 @@ jobs:
           publisher-id: ${{ env.PUBLISHER_ID }}
           extension-id: ${{ inputs.extension_id }}-oicd
           accounts: |
-            https://dev.azure.com/jessehouwing
+            https://dev.azure.com/jessehouwing-dev
 
       - name: Wait for installation
         uses: jessehouwing/azure-devops-extension-tasks/wait-for-installation@refactor/v6
@@ -193,4 +193,4 @@ jobs:
           auth-type: oidc
           vsix-path: ${{ steps.package.outputs.vsix-path }}
           accounts: |
-            https://dev.azure.com/jessehouwing
+            https://dev.azure.com/jessehouwing-dev
