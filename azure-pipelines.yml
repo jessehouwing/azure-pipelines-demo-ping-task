@@ -12,7 +12,7 @@ variables:
   initialVersion: 1.0.0
   marketplacePatServiceConnection: MarketplacePAT
   organizationUrls: |
-    https://dev.azure.com/your-org
+    https://dev.azure.com/jessehouwing-dev
 
 steps:
   - checkout: self
