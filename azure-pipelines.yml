@@ -10,7 +10,7 @@ variables:
   publisherId: jessehouwing
   extensionId: azure-pipelines-demo-ping-task
   initialVersion: 1.0.0
-  marketplacePatServiceConnection: MarketplacePatConnection
+  marketplacePatServiceConnection: MarketplacePAT
   organizationUrls: |
     https://dev.azure.com/your-org
 
