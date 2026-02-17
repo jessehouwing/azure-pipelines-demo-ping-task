@@ -47,14 +47,16 @@ steps:
     name: package
     displayName: Package VSIX
     inputs:
-      operation: package
-      publisherId: $(publisherId)
-      extensionId: $(extensionId)
-      extensionVersion: $(resolvedVersion)
-      extensionVisibility: private
-      updateTasksVersion: patch
+      operation: 'package'
+      publisherId: '$(publisherId)'
+      extensionId: '$(extensionId)'
+      use: 'manifest'
+      manifestFile: 'vss-extension.json'
+      extensionVersion: '$(resolvedVersion)'
+      extensionVisibility: 'private'
+      outputPath: '$(Build.ArtifactStagingDirectory)'
+      updateTasksVersion: 'patch'
       updateTasksId: true
-      outputPath: $(Build.ArtifactStagingDirectory)
 
   - publish: $(Build.ArtifactStagingDirectory)
     artifact: vsix
