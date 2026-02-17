@@ -32,7 +32,7 @@ steps:
       connectionNamePAT: $(marketplacePatServiceConnection)
       publisherId: $(publisherId)
       extensionId: $(extensionId)
-      versionAction: Patch
+      versionAction: patch
 
   - pwsh: |
       $version = '$(initialVersion)'
