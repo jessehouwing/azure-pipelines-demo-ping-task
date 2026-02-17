@@ -70,7 +70,7 @@ steps:
       connectionType: PAT
       connectionNamePAT: $(marketplacePatServiceConnection)
       use: vsix
-      vsixFile: $(package.extension.outputPath)
+      vsixFile: $(package.outputPath)
       noWaitValidation: true
 
   - task: azdo-marketplace@6
@@ -81,7 +81,7 @@ steps:
       connectionNamePAT: $(marketplacePatServiceConnection)
       publisherId: $(publisherId)
       extensionId: $(extensionId)
-      vsixFile: $(package.extension.outputPath)
+      vsixFile: $(package.outputPath)
 
   - task: azdo-marketplace@6
     displayName: Share extension
@@ -112,7 +112,5 @@ steps:
       operation: waitForInstallation
       connectionType: PAT
       connectionNamePAT: $(marketplacePatServiceConnection)
-      publisherId: $(publisherId)
-      extensionId: $(extensionId)
       accounts: $(organizationUrls)
-      vsixFile: $(package.extension.outputPath)
+      vsixFile: $(package.outputPath)
