@@ -36,8 +36,8 @@ steps:
 
   - pwsh: |
       $version = '$(initialVersion)'
-      if ('$(queryVersion.extension.proposedVersion)' -and '$(queryVersion.extension.proposedVersion)' -ne '') {
-        $version = '$(queryVersion.extension.proposedVersion)'
+      if ('$(queryVersion.proposedVersion)' -and '$(queryVersion.proposedVersion)' -ne '') {
+        $version = '$(queryVersion.proposedVersion)'
       }
       Write-Host "Using extension version: $version"
       Write-Host "##vso[task.setvariable variable=resolvedVersion]$version"
