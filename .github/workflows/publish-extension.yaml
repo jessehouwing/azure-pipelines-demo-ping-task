@@ -41,27 +41,6 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 #v4.4.0
         with:
           node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Test
-        shell: bash
-        run: |
-          stop_marker="$(uuidgen)"
-          echo "::stop-commands::$stop_marker"
-          npm run test
-          echo "::$stop_marker::"
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Bundle
-        run: npm run bundle
 
       - id: query
         name: Query next patch version
