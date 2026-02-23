@@ -27,12 +27,12 @@ steps:
     displayName: Query next patch version
     continueOnError: true
     inputs:
-      operation: queryVersion
-      connectionType: PAT
-      connectionNamePAT: $(marketplacePatServiceConnection)
-      publisherId: $(publisherId)
-      extensionId: $(extensionId)
-      versionAction: patch
+      operation: 'queryVersion'
+      connectionType: 'AzureRM'
+      connectionNameAzureRm: 'MVP Sponsorship (cec4b369-63dc-49d5-8422-3ed2e63e5f48)'
+      publisherId: '$(publisherId)'
+      extensionId: '$(extensionId)'
+      versionAction: 'patch'
 
   - pwsh: |
       $version = '$(initialVersion)'
