@@ -35,6 +35,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6.0.2
 
       - name: Setup Node.js
@@ -45,7 +50,7 @@ jobs:
       - id: query
         name: Query next patch version
         continue-on-error: true
-        uses: jessehouwing/azdo-marketplace/query-version@main
+        uses: jessehouwing/azdo-marketplace/query-version@f3950fa87f7bed23f9e2df06ecabad539e41a269 # main
         with:
           auth-type: pat
           token: ${{ secrets.MARKETPLACE_PAT }}
@@ -65,7 +70,7 @@ jobs:
 
       - id: package
         name: Package VSIX
-        uses: jessehouwing/azdo-marketplace/package@main
+        uses: jessehouwing/azdo-marketplace/package@f3950fa87f7bed23f9e2df06ecabad539e41a269 # main
         with:
           publisher-id: ${{ env.PUBLISHER_ID }}
           extension-id: ${{ env.EXTENSION_ID }}
@@ -83,7 +88,7 @@ jobs:
           if-no-files-found: error
 
       - name: Publish from VSIX
-        uses: jessehouwing/azdo-marketplace/publish@main
+        uses: jessehouwing/azdo-marketplace/publish@f3950fa87f7bed23f9e2df06ecabad539e41a269 # main
         with:
           auth-type: pat
           token: ${{ secrets.MARKETPLACE_PAT }}
@@ -92,7 +97,7 @@ jobs:
           no-wait-validation: true
 
       - name: Wait for validation
-        uses: jessehouwing/azdo-marketplace/wait-for-validation@main
+        uses: jessehouwing/azdo-marketplace/wait-for-validation@f3950fa87f7bed23f9e2df06ecabad539e41a269 # main
         with:
           auth-type: pat
           token: ${{ secrets.MARKETPLACE_PAT }}
@@ -100,7 +105,7 @@ jobs:
 
       - name: Share extension
         if: ${{ inputs.organization_urls != '' }}
-        uses: jessehouwing/azdo-marketplace/share@main
+        uses: jessehouwing/azdo-marketplace/share@f3950fa87f7bed23f9e2df06ecabad539e41a269 # main
         with:
           auth-type: pat
           token: ${{ secrets.MARKETPLACE_PAT }}
@@ -109,7 +114,7 @@ jobs:
 
       - name: Install extension
         if: ${{ inputs.organization_urls != '' }}
-        uses: jessehouwing/azdo-marketplace/install@main
+        uses: jessehouwing/azdo-marketplace/install@f3950fa87f7bed23f9e2df06ecabad539e41a269 # main
         with:
           auth-type: pat
           token: ${{ secrets.MARKETPLACE_PAT }}
@@ -118,7 +123,7 @@ jobs:
 
       - name: Wait for installation
         if: ${{ inputs.organization_urls != '' }}
-        uses: jessehouwing/azdo-marketplace/wait-for-installation@main
+        uses: jessehouwing/azdo-marketplace/wait-for-installation@f3950fa87f7bed23f9e2df06ecabad539e41a269 # main
         with:
           auth-type: pat
           token: ${{ secrets.MARKETPLACE_PAT }}
