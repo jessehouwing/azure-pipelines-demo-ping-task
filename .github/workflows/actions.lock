@@ -5,18 +5,18 @@ version: 'v0.0.3'
 workflows:
     '.github/workflows/dependency-submission.yml':
         - 'actions/checkout@v6.0.3'
-        - 'jessehouwing/azure-pipelines-dependency-submission@v1.0.10'
-        - 'step-security/harden-runner@v2.19.3'
+        - 'jessehouwing/azure-pipelines-dependency-submission@v1.0.14'
+        - 'step-security/harden-runner@v2.23.0'
     '.github/workflows/publish-extension.yaml':
         - 'actions/checkout@v6.0.2'
         - 'actions/setup-node@v4.4.0'
         - 'actions/upload-artifact@v6.0.0'
         - 'jessehouwing/azdo-marketplace@f3950fa87f7bed23f9e2df06ecabad539e41a269'
-        - 'step-security/harden-runner@v2.19.3'
+        - 'step-security/harden-runner@v2.23.0'
     '.github/workflows/zizmor.yml':
         - 'actions/checkout@v7.0.1'
         - 'actions/setup-python@v7.1.0'
-        - 'github/codeql-action@v4.39.3'
+        - 'github/codeql-action@v4.39.4'
         - 'step-security/harden-runner@v2.23.0'
 dependencies:
     'actions/checkout@v6.0.2':
@@ -49,9 +49,9 @@ dependencies:
         commit: 'sha1-b7c566a772e6b6bfb58ed0dc250532a479d7789f'
         owner_id: 44036562
         repo_id: 192625955
-    'github/codeql-action@v4.39.3':
-        ref: 'v4.39.3'
-        commit: 'sha1-33d7b85da1a04171e211befe2c739303b9a4c066'
+    'github/codeql-action@v4.39.4':
+        ref: 'v4.39.4'
+        commit: 'sha1-1bd86f2fdb4b86187fa4059f16f31a3202acc9ea'
         owner_id: 9919
         repo_id: 259445878
     'jessehouwing/azdo-marketplace@f3950fa87f7bed23f9e2df06ecabad539e41a269':
@@ -66,16 +66,11 @@ dependencies:
         commit: 'sha1-c8a895848fc6bcfc279e4a2b3156b900b3b44740'
         owner_id: 4173387
         repo_id: 1158033287
-    'jessehouwing/azure-pipelines-dependency-submission@v1.0.10':
-        ref: 'v1.0.10'
-        commit: 'sha1-2e82a5a35d861d00e9036ad4026ab780103c50b2'
+    'jessehouwing/azure-pipelines-dependency-submission@v1.0.14':
+        ref: 'v1.0.14'
+        commit: 'sha1-7cdac8f87767b7aec6eb7f814c8142dbe7d8c532'
         owner_id: 4173387
         repo_id: 1113968921
-    'step-security/harden-runner@v2.19.3':
-        ref: 'v2.19.3'
-        commit: 'sha1-ab7a9404c0f3da075243ca237b5fac12c98deaa5'
-        owner_id: 88700172
-        repo_id: 422287306
     'step-security/harden-runner@v2.23.0':
         ref: 'v2.23.0'
         commit: 'sha1-aebdcf6156ab6691adf63218240e476564a1ed4c'
