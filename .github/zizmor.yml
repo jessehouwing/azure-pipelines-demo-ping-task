@@ -1,0 +1,14 @@
+# zizmor configuration for this repo.
+#
+# This repo pins GitHub Actions to immutable commit SHAs via the
+# `gh actions-lock` extension (see .github/workflows/actions.lock), not via
+# inline `owner/repo@<sha>` refs in each workflow file. zizmor's
+# `unpinned-uses` audit doesn't know about this out-of-band pinning mechanism
+# and would otherwise flag every `uses:` line.
+rules:
+  unpinned-uses:
+    disable: true
+  # This repo intentionally uses a 3-day Dependabot cooldown, shorter than
+  # zizmor's generic >=7 day recommendation.
+  dependabot-cooldown:
+    disable: true
