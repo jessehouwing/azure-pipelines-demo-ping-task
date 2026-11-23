@@ -88,7 +88,7 @@ jobs:
           if-no-files-found: error
 
       - name: Publish from VSIX
-        uses: jessehouwing/azdo-marketplace/publish@f3950fa87f7bed23f9e2df06ecabad539e41a269 # main
+        uses: jessehouwing/azdo-marketplace/publish@c8a895848fc6bcfc279e4a2b3156b900b3b44740 # main
         with:
           auth-type: pat
           token: ${{ secrets.MARKETPLACE_PAT }}
