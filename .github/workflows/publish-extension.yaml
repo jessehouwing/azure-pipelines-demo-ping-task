@@ -81,7 +81,7 @@ jobs:
           output-path: ${{ runner.temp }}
 
       - name: Upload VSIX artifact
-        uses: actions/upload-artifact@v6.0.0
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: vsix-${{ env.EXTENSION_ID }}-${{ steps.version.outputs.value }}
           path: ${{ steps.package.outputs.vsix-path }}
