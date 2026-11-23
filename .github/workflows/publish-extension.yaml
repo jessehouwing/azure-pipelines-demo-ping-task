@@ -70,7 +70,7 @@ jobs:
 
       - id: package
         name: Package VSIX
-        uses: jessehouwing/azdo-marketplace/package@f3950fa87f7bed23f9e2df06ecabad539e41a269 # main
+        uses: jessehouwing/azdo-marketplace/package@c8a895848fc6bcfc279e4a2b3156b900b3b44740 # main
         with:
           publisher-id: ${{ env.PUBLISHER_ID }}
           extension-id: ${{ env.EXTENSION_ID }}
